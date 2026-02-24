@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href = "style.css">
-  <title>Checkout</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="../../css/style.css">
+<title>Checkout</title>
 </head>
 <body>
     <nav class="navbar">
@@ -51,71 +52,6 @@
 
 </div>
 
-<script>
-  let cart = [
-    { id: 1, name: "Wireless Headphones", price: 59.99, qty: 1 },
-    { id: 2, name: "Phone Case",          price: 14.99, qty: 2 },
-    { id: 3, name: "USB-C Cable",         price: 9.99,  qty: 1 },
-  ];
-
-  function renderCart() {
-    const container = document.getElementById("cart-items");
-    container.innerHTML = cart.map(item => `
-      <div class="cart-item">
-        <div>
-          <strong>${item.name}</strong><br>
-          <small>$${item.price.toFixed(2)} × 
-            <input type="number" value="${item.qty}" min="1" 
-              style="width:45px" onchange="updateQty(${item.id}, this.value)">
-          </small>
-        </div>
-        <div>
-          $${(item.price * item.qty).toFixed(2)}
-          <button onclick="removeItem(${item.id})">✕</button>
-        </div>
-      </div>
-    `).join("");
-    updateSummary();
-  }
-
-  function updateQty(id, qty) {
-    const item = cart.find(i => i.id === id);
-    if (item) item.qty = parseInt(qty) || 1;
-    updateSummary();
-  }
-
-  function removeItem(id) {
-    cart = cart.filter(i => i.id !== id);
-    renderCart();
-  }
-
-  function updateSummary() {
-    const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-    const shippingVal = parseFloat(document.getElementById("shipping").value);
-    const total = subtotal + shippingVal;
-
-    document.getElementById("subtotal").textContent = `$${subtotal.toFixed(2)}`;
-    document.getElementById("shipping-cost").textContent = shippingVal === 0 ? "Free" : `$${shippingVal.toFixed(2)}`;
-    document.getElementById("total").textContent = `$${total.toFixed(2)}`;
-
-
-    document.getElementById("summary-items").innerHTML = cart.map(i =>
-      `<div class="summary-line"><span>${i.name} ×${i.qty}</span><span>$${(i.price*i.qty).toFixed(2)}</span></div>`
-    ).join("");
-  }
-
-  function placeOrder() {
-    const name = document.getElementById("name").value;
-    const address = document.getElementById("address").value;
-    if (!name || !address) {
-      alert("Please fill in your name and address.");
-      return;
-    }
-    alert(`Order placed! Thanks, ${name}. We'll ship to: ${address}`);
-  }
-
-  renderCart();
-</script>
 
 </body>
 </html>
