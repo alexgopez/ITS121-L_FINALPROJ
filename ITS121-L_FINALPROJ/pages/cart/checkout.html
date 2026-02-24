@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href = "style.css">
+  <title>Checkout</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul class="menu">
+            <a href="jewelry.html">Jewelry</a></li>
+            <a href="checkout.html">Checkout</a></li>
+        </ul>
+
+<div class="checkout-wrapper">
+
+  <!-- LEFT: Cart + Shipping -->
+  <div class="cart">
+    <h2>🛒 Your Cart</h2>
+    <div id="cart-items"></div>
+
+    <h2 style="margin-top:24px">📦 Shipping Info</h2>
+    <div class="shipping-form">
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Jane Doe">
+
+      <label>Address</label>
+      <input type="text" id="address" placeholder="123 Main St">
+
+      <label>City</label>
+      <input type="text" id="city" placeholder="New York">
+
+      <label>Shipping Method</label>
+      <select id="shipping" onchange="updateSummary()">
+        <option value="0">Standard (Free) — 5-7 days</option>
+        <option value="9.99">Express ($9.99) — 2-3 days</option>
+        <option value="19.99">Overnight ($19.99) — Next day</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- RIGHT: Order Summary -->
+  <div class="summary">
+    <h2> Order Summary</h2>
+    <div id="summary-items"></div>
+    <div class="summary-line"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
+    <div class="summary-line"><span>Shipping</span><span id="shipping-cost">Free</span></div>
+    <div class="summary-line total"><span>Total</span><span id="total">$0.00</span></div>
+    <button class="btn-checkout" onclick="placeOrder()">Place Order</button>
+  </div>
+
+</div>
+
+<script>
+  let cart = [
+    { id: 1, name: "Wireless Headphones", price: 59.99, qty: 1 },
+    { id: 2, name: "Phone Case",          price: 14.99, qty: 2 },
+    { id: 3, name: "USB-C Cable",         price: 9.99,  qty: 1 },
+  ];
+
+  function renderCart() {
+    const container = document.getElementById("cart-items");
+    container.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <div>
+          <strong>${item.name}</strong><br>
+          <small>$${item.price.toFixed(2)} × 
+            <input type="number" value="${item.qty}" min="1" 
+              style="width:45px" onchange="updateQty(${item.id}, this.value)">
+          </small>
+        </div>
+        <div>
+          $${(item.price * item.qty).toFixed(2)}
+          <button onclick="removeItem(${item.id})">✕</button>
+        </div>
+      </div>
+    `).join("");
+    updateSummary();
+  }
+
+  function updateQty(id, qty) {
+    const item = cart.find(i => i.id === id);
+    if (item) item.qty = parseInt(qty) || 1;
+    updateSummary();
+  }
+
+  function removeItem(id) {
+    cart = cart.filter(i => i.id !== id);
+    renderCart();
+  }
+
+  function updateSummary() {
+    const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
+    const shippingVal = parseFloat(document.getElementById("shipping").value);
+    const total = subtotal + shippingVal;
+
+    document.getElementById("subtotal").textContent = `$${subtotal.toFixed(2)}`;
+    document.getElementById("shipping-cost").textContent = shippingVal === 0 ? "Free" : `$${shippingVal.toFixed(2)}`;
+    document.getElementById("total").textContent = `$${total.toFixed(2)}`;
+
+
+    document.getElementById("summary-items").innerHTML = cart.map(i =>
+      `<div class="summary-line"><span>${i.name} ×${i.qty}</span><span>$${(i.price*i.qty).toFixed(2)}</span></div>`
+    ).join("");
+  }
+
+  function placeOrder() {
+    const name = document.getElementById("name").value;
+    const address = document.getElementById("address").value;
+    if (!name || !address) {
+      alert("Please fill in your name and address.");
+      return;
+    }
+    alert(`Order placed! Thanks, ${name}. We'll ship to: ${address}`);
+  }
+
+  renderCart();
+</script>
+
+</body>
+</html>
