@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shirts - Clothing Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #f4f4f4; }
+        header { background: #111; color: white; padding: 15px; }
+        nav ul { list-style: none; padding: 0; }
+        nav ul li { display: inline; margin-right: 15px; }
+        nav ul li a { color: white; text-decoration: none; }
+        main { padding: 20px; }
+        .product-container { display: flex; gap: 20px; flex-wrap: wrap; }
+        .card { background: white; padding: 15px; width: 220px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        select, button { width: 100%; margin-top: 8px; padding: 6px; }
+        button { background: black; color: white; border: none; cursor: pointer; }
+        button:hover { background: #444; }
+        .cart { margin-top: 30px; padding: 15px; background: white; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        footer { text-align: center; padding: 15px; background: #111; color: white; margin-top: 30px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Clothing Store - Shirts</h1>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="shirts.html">Shirts</a></li>
+            <li><a href="pants.html">Pants</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+<section id="shirts">
+    <h2>Shirts</h2>
+
+    <div class="product-container">
+        <div class="card">
+            <h3>Basic White Shirt</h3>
+            <p>₱499</p>
+            <select id="size1">
+                <option value="">Select Size</option>
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+                <option>XL</option>
+            </select>
+            <button onclick="addToCart('Basic White Shirt', 'size1')">Add to Cart</button>
+        </div>
+
+        <div class="card">
+            <h3>Black Polo</h3>
+            <p>₱699</p>
+            <select id="size2">
+                <option value="">Select Size</option>
+                <option>Small</option>
+                <option>Medium</option>
+                <option>Large</option>
+                <option>XL</option>
+            </select>
+            <button onclick="addToCart('Black Polo', 'size2')">Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<div class="cart">
+    <h3>Selected Items:</h3>
+    <ul id="cartList"></ul>
+</div>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Clothing Store. All rights reserved.</p>
+</footer>
+
+<script>
+function addToCart(productName, sizeId) {
+    let size = document.getElementById(sizeId).value;
+    if (size === "") { alert("Please select a size first."); return; }
+    let cartList = document.getElementById("cartList");
+    let li = document.createElement("li");
+    li.textContent = productName + " - Size: " + size;
+    cartList.appendChild(li);
+}
+</script>
+
+</body>
+</html>
