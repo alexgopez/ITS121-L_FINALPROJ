@@ -7,36 +7,78 @@
 <title>Checkout</title>
 </head>
 <body>
-    <nav class="navbar">
-        <ul class="menu">
-            <a href="jewelry.html">Jewelry</a></li>
-            <a href="checkout.html">Checkout</a></li>
-        </ul>
 
-<div class="checkout-wrapper">
+<header>
+  <div class="logo">Aurèle</div>
+  <div class="step-indicator">
+    <span class="step active">1 Checkout</span>
+    <span class="step-sep">›</span>
+    <span class="step">2 Payment</span>
+    <span class="step-sep">›</span>
+    <span class="step">3 Confirm</span>
+  </div>
+</header>
 
-  <!-- LEFT: Cart + Shipping -->
-  <div class="cart">
-    <h2>🛒 Your Cart</h2>
-    <div id="cart-items"></div>
-
-    <h2 style="margin-top:24px">📦 Shipping Info</h2>
-    <div class="shipping-form">
-      <label>Full Name</label>
-      <input type="text" id="name" placeholder="Jane Doe">
-
-      <label>Address</label>
-      <input type="text" id="address" placeholder="123 Main St">
-
-      <label>City</label>
-      <input type="text" id="city" placeholder="New York">
-
-      <label>Shipping Method</label>
-      <select id="shipping" onchange="updateSummary()">
-        <option value="0">Standard (Free) — 5-7 days</option>
-        <option value="9.99">Express ($9.99) — 2-3 days</option>
-        <option value="19.99">Overnight ($19.99) — Next day</option>
-      </select>
+<div class="container">
+  <div>
+    <p class="section-title">Shipping Information</p>
+    <div class="card">
+      <form id="checkoutForm" novalidate>
+        <div class="form-row">
+          <div class="form-group" id="fg-first">
+            <label>First Name</label>
+            <input type="text" id="firstName" placeholder="Jane" />
+            <div class="error-msg">Please enter your first name.</div>
+          </div>
+          <div class="form-group" id="fg-last">
+            <label>Last Name</label>
+            <input type="text" id="lastName" placeholder="Doe" />
+            <div class="error-msg">Please enter your last name.</div>
+          </div>
+        </div>
+        <div class="form-group" id="fg-email">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="jane@example.com" />
+          <div class="error-msg">Please enter a valid email.</div>
+        </div>
+        <div class="form-group" id="fg-phone">
+          <label>Phone (optional)</label>
+          <input type="tel" id="phone" placeholder="+1 555 000 0000" />
+        </div>
+        <div class="form-group" id="fg-address">
+          <label>Street Address</label>
+          <input type="text" id="address" placeholder="123 Main Street" />
+          <div class="error-msg">Please enter your address.</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group" id="fg-city">
+            <label>City</label>
+            <input type="text" id="city" placeholder="New York" />
+            <div class="error-msg">Required.</div>
+          </div>
+          <div class="form-group" id="fg-zip">
+            <label>ZIP / Postal Code</label>
+            <input type="text" id="zip" placeholder="10001" />
+            <div class="error-msg">Required.</div>
+          </div>
+        </div>
+        <div class="form-group" id="fg-country">
+          <label>Country</label>
+          <select id="country">
+            <option value="">Select country</option>
+            <option>United States</option>
+            <option>Canada</option>
+            <option>United Kingdom</option>
+            <option>Australia</option>
+            <option>France</option>
+            <option>Germany</option>
+            <option>Japan</option>
+            <option>Philippines</option>
+            <option>Other</option>
+          </select>
+          <div class="error-msg">Please select a country.</div>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -55,3 +97,5 @@
 
 </body>
 </html>
+
+
