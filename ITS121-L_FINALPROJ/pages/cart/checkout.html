@@ -1,121 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <link rel="stylesheet" href = "style.css">
-  <title>Checkout</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-        <ul class="menu">
-            <a href="jewelry.html">Jewelry</a></li>
-            <a href="checkout.html">Checkout</a></li>
-        </ul>
 
-<div class="checkout-wrapper">
+<header>
+  <div class="logo">Aurèle</div>
+  <div class="step-indicator">
+    <span class="step active">1 Checkout</span>
+    <span class="step-sep">›</span>
+    <span class="step">2 Payment</span>
+    <span class="step-sep">›</span>
+    <span class="step">3 Confirm</span>
+  </div>
+</header>
 
-  <!-- LEFT: Cart + Shipping -->
-  <div class="cart">
-    <h2>🛒 Your Cart</h2>
-    <div id="cart-items"></div>
-
-    <h2 style="margin-top:24px">📦 Shipping Info</h2>
-    <div class="shipping-form">
-      <label>Full Name</label>
-      <input type="text" id="name" placeholder="Jane Doe">
-
-      <label>Address</label>
-      <input type="text" id="address" placeholder="123 Main St">
-
-      <label>City</label>
-      <input type="text" id="city" placeholder="New York">
-
-      <label>Shipping Method</label>
-      <select id="shipping" onchange="updateSummary()">
-        <option value="0">Standard (Free) — 5-7 days</option>
-        <option value="9.99">Express ($9.99) — 2-3 days</option>
-        <option value="19.99">Overnight ($19.99) — Next day</option>
-      </select>
+<div class="container">
+  <div>
+    <p class="section-title">Shipping Information</p>
+    <div class="card">
+      <form id="checkoutForm" novalidate>
+        <div class="form-row">
+          <div class="form-group" id="fg-first">
+            <label>First Name</label>
+            <input type="text" id="firstName" placeholder="Jane" />
+            <div class="error-msg">Please enter your first name.</div>
+          </div>
+          <div class="form-group" id="fg-last">
+            <label>Last Name</label>
+            <input type="text" id="lastName" placeholder="Doe" />
+            <div class="error-msg">Please enter your last name.</div>
+          </div>
+        </div>
+        <div class="form-group" id="fg-email">
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="jane@example.com" />
+          <div class="error-msg">Please enter a valid email.</div>
+        </div>
+        <div class="form-group" id="fg-phone">
+          <label>Phone (optional)</label>
+          <input type="tel" id="phone" placeholder="+1 555 000 0000" />
+        </div>
+        <div class="form-group" id="fg-address">
+          <label>Street Address</label>
+          <input type="text" id="address" placeholder="123 Main Street" />
+          <div class="error-msg">Please enter your address.</div>
+        </div>
+        <div class="form-row">
+          <div class="form-group" id="fg-city">
+            <label>City</label>
+            <input type="text" id="city" placeholder="New York" />
+            <div class="error-msg">Required.</div>
+          </div>
+          <div class="form-group" id="fg-zip">
+            <label>ZIP / Postal Code</label>
+            <input type="text" id="zip" placeholder="10001" />
+            <div class="error-msg">Required.</div>
+          </div>
+        </div>
+        <div class="form-group" id="fg-country">
+          <label>Country</label>
+          <select id="country">
+            <option value="">Select country</option>
+            <option>United States</option>
+            <option>Canada</option>
+            <option>United Kingdom</option>
+            <option>Australia</option>
+            <option>France</option>
+            <option>Germany</option>
+            <option>Japan</option>
+            <option>Philippines</option>
+            <option>Other</option>
+          </select>
+          <div class="error-msg">Please select a country.</div>
+        </div>
+      </form>
     </div>
   </div>
+  <div>
+    <p class="section-title">Order Summary</p>
+    <div class="card order-card">
+      <div class="item">
+        <div class="item-info">
+          <div class="item-thumb">🕯️</div>
+          <div>
+            <div class="item-name">Vetiver Noir Candle</div>
+            <div class="item-desc">200g · Amber & Wood</div>
+          </div>
+        </div>
+        <div class="item-price">$58.00</div>
+      </div>
+      <div class="item">
+        <div class="item-info">
+          <div class="item-thumb">🧴</div>
+          <div>
+            <div class="item-name">Silk Face Serum</div>
+            <div class="item-desc">30ml · Hydrating</div>
+          </div>
+        </div>
+        <div class="item-price">$94.00</div>
+      </div>
+      <div class="item">
+        <div class="item-info">
+          <div class="item-thumb">🎁</div>
+          <div>
+            <div class="item-name">Luxury Gift Wrap</div>
+            <div class="item-desc">Ribbon & Card</div>
+          </div>
+        </div>
+        <div class="item-price">$12.00</div>
+      </div>
 
-  <!-- RIGHT: Order Summary -->
-  <div class="summary">
-    <h2> Order Summary</h2>
-    <div id="summary-items"></div>
-    <div class="summary-line"><span>Subtotal</span><span id="subtotal">$0.00</span></div>
-    <div class="summary-line"><span>Shipping</span><span id="shipping-cost">Free</span></div>
-    <div class="summary-line total"><span>Total</span><span id="total">$0.00</span></div>
-    <button class="btn-checkout" onclick="placeOrder()">Place Order</button>
+      <div class="totals">
+        <div class="total-row"><span>Subtotal</span><span>$164.00</span></div>
+        <div class="total-row"><span>Shipping</span><span>$8.00</span></div>
+        <div class="total-row"><span>Tax (8%)</span><span>$13.12</span></div>
+        <div class="total-row grand"><span>Total</span><span>$185.12</span></div>
+      </div>
+
+      <button class="btn-checkout" onclick="proceedToPayment()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Continue to Payment
+      </button>
+
+      <div class="secure-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        SSL Encrypted · Secure Checkout
+      </div>
+    </div>
   </div>
-
 </div>
 
 <script>
-  let cart = [
-    { id: 1, name: "Wireless Headphones", price: 59.99, qty: 1 },
-    { id: 2, name: "Phone Case",          price: 14.99, qty: 2 },
-    { id: 3, name: "USB-C Cable",         price: 9.99,  qty: 1 },
+function validate(id, fieldId) {
+  const el = document.getElementById(fieldId);
+  const val = el ? el.value.trim() : '';
+  const group = document.getElementById(id);
+  if (!val) { group.classList.add('error'); return false; }
+  if (fieldId === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
+    group.classList.add('error'); return false;
+  }
+  group.classList.remove('error');
+  return true;
+}
+
+function proceedToPayment() {
+  const checks = [
+    ['fg-first','firstName'],
+    ['fg-last','lastName'],
+    ['fg-email','email'],
+    ['fg-address','address'],
+    ['fg-city','city'],
+    ['fg-zip','zip'],
+    ['fg-country','country'],
   ];
-
-  function renderCart() {
-    const container = document.getElementById("cart-items");
-    container.innerHTML = cart.map(item => `
-      <div class="cart-item">
-        <div>
-          <strong>${item.name}</strong><br>
-          <small>$${item.price.toFixed(2)} × 
-            <input type="number" value="${item.qty}" min="1" 
-              style="width:45px" onchange="updateQty(${item.id}, this.value)">
-          </small>
-        </div>
-        <div>
-          $${(item.price * item.qty).toFixed(2)}
-          <button onclick="removeItem(${item.id})">✕</button>
-        </div>
-      </div>
-    `).join("");
-    updateSummary();
+  const valid = checks.map(([g,f]) => validate(g,f)).every(Boolean);
+  if (!valid) {
+    document.querySelector('.form-group.error input, .form-group.error select')?.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
   }
-
-  function updateQty(id, qty) {
-    const item = cart.find(i => i.id === id);
-    if (item) item.qty = parseInt(qty) || 1;
-    updateSummary();
-  }
-
-  function removeItem(id) {
-    cart = cart.filter(i => i.id !== id);
-    renderCart();
-  }
-
-  function updateSummary() {
-    const subtotal = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-    const shippingVal = parseFloat(document.getElementById("shipping").value);
-    const total = subtotal + shippingVal;
-
-    document.getElementById("subtotal").textContent = `$${subtotal.toFixed(2)}`;
-    document.getElementById("shipping-cost").textContent = shippingVal === 0 ? "Free" : `$${shippingVal.toFixed(2)}`;
-    document.getElementById("total").textContent = `$${total.toFixed(2)}`;
-
-
-    document.getElementById("summary-items").innerHTML = cart.map(i =>
-      `<div class="summary-line"><span>${i.name} ×${i.qty}</span><span>$${(i.price*i.qty).toFixed(2)}</span></div>`
-    ).join("");
-  }
-
-  function placeOrder() {
-    const name = document.getElementById("name").value;
-    const address = document.getElementById("address").value;
-    if (!name || !address) {
-      alert("Please fill in your name and address.");
-      return;
-    }
-    alert(`Order placed! Thanks, ${name}. We'll ship to: ${address}`);
-  }
-
-  renderCart();
+  sessionStorage.setItem('checkout', JSON.stringify({
+    name: document.getElementById('firstName').value + ' ' + document.getElementById('lastName').value,
+    email: document.getElementById('email').value,
+    address: `${document.getElementById('address').value}, ${document.getElementById('city').value}, ${document.getElementById('zip').value}, ${document.getElementById('country').value}`,
+    total: '$185.12'
+  }));
+  window.location.href = 'payment.html';
+}
 </script>
-
 </body>
 </html>
+
+
