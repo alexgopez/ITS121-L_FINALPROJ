@@ -228,9 +228,8 @@ body {
 .gallery {
     position: relative;
     padding-top: 5.5cm;
-    margin-top: 0px;
+    margin-top: 0;
     background: linear-gradient(to bottom, #ccc 3cm, transparent 0);
-    
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 60px;
